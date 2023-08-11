@@ -1,0 +1,7 @@
+include README.md LICENSE pybind11/LICENSE
+graft headers/include/Eigen
+graft pybind11/include
+graft pybind11/tools
+graft CDT/include
+graft cdt_bindings.cpp
+global-include CMakeLists.txt *.cmake
