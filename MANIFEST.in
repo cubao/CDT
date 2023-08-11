@@ -3,5 +3,6 @@ graft headers/include/Eigen
 graft pybind11/include
 graft pybind11/tools
 graft CDT/include
+graft CDT/extras
 graft cdt_bindings.cpp
 global-include CMakeLists.txt *.cmake

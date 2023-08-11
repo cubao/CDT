@@ -22,6 +22,7 @@ endif()
 
 include_directories(${PROJECT_SOURCE_DIR}/headers/include)
 include_directories(${PROJECT_SOURCE_DIR}/CDT/include)
+include_directories(${PROJECT_SOURCE_DIR}/CDT/extras)
 
 set(CMAKE_CXX_STANDARD 11)
 set(PYBIND11_CPP_STANDARD -std=c++11)
