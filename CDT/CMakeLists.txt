@@ -14,6 +14,7 @@ project(
 
 # export all symbols as we do it by instantiating templates anyway
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # options
 option(CDT_USE_AS_COMPILED_LIBRARY
