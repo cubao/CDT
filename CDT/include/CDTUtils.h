@@ -96,9 +96,10 @@ struct CDT_EXPORT V2d
 {
     T x; ///< X-coordinate
     T y; ///< Y-coordinate
+    T z{0};
 
     /// Create vector from X and Y coordinates
-    static V2d make(T x, T y);
+    static V2d make(T x, T y, T z);
 };
 
 /// X- coordinate getter for V2d

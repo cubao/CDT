@@ -22,7 +22,7 @@ CMAKE_ARGS ?= \
 	-DPYTHON_EXECUTABLE=$(PYTHON_EXECUTABLE) \
 	$(CMAKE_EXTRA_ARGS)
 build:
-	mkdir -p $(BUILD_DIR) && cd $(BUILD_DIR) && cmake $(CMAKE_ARGS) $(PROJECT_SOURCE_DIR)
+	mkdir -p $(BUILD_DIR) && cd $(BUILD_DIR) && cmake $(CMAKE_ARGS) $(PROJECT_SOURCE_DIR) && make -j $(NUM_JOB)
 install: build
 .PHONY: build
 
