@@ -21,6 +21,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
 endif()
 
 include_directories(${PROJECT_SOURCE_DIR}/headers/include)
+include_directories(${PROJECT_SOURCE_DIR}/CDT/include)
 
 set(CMAKE_CXX_STANDARD 11)
 set(PYBIND11_CPP_STANDARD -std=c++11)
