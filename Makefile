@@ -1,10 +1,7 @@
 PROJECT_SOURCE_DIR ?= $(abspath ./)
 BUILD_DIR ?= $(PROJECT_SOURCE_DIR)/build
 INSTALL_DIR ?= $(BUILD_DIR)/install
-CONAN_PKG_DIR ?= $(BUILD_DIR)/conan_package
-DEPLOY_DIR ?= $(BUILD_DIR)/deploy
 NUM_JOB ?= 8
-CONAN_REMOTE ?= conan-momenta
 BUILD_TYPE ?= Release
 
 PYTHON_EXECUTABLE ?= $(shell which python3)
