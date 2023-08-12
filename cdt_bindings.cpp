@@ -375,11 +375,12 @@ PYBIND11_MODULE(_cdt3d, m)
             "erase_outer_triangles_and_holes",
             &Triangulation::eraseOuterTrianglesAndHoles);
 
-    // m.def(
-    //     "verify_topology",
-    //     &CDT::verifyTopology<coord_t>,
-    //     py::arg("triangulation"))
-    //     //
-    //     ;
+    m.def(
+        "verify_topology",
+        [](const Triangulation &cdt) {
+            return verifyTopology(cdt);
+        }, py::arg("triangulation"))
+        //
+        ;
 
 }
