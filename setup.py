@@ -135,6 +135,4 @@ setup(
     ext_modules=[CMakeExtension("cdt3d")],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
-    # install_requires=["numpy"],
-    # extras_require={"test": ["pytest>=6.0"]},
 )
