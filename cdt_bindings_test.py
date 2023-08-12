@@ -35,6 +35,9 @@ def test_V2d() -> None:
     p = cdt.V2d(np.array([42., 42.]))
     assert p.x == 42 and p.y == 42, "Error in constructing 2D vector with buffer protocol"
 
+    assert cdt.V2d(42, 42) == cdt.V2d(42, 42.0)
+    assert cdt.V2d(42, 42) != cdt.V2d(42, 42.1)
+
     assert cdt.V2d(1.23, 2).__repr__() == "V2d(1.23, 2)", "Wrong __repr__ output for V2d"
 
 
@@ -47,7 +50,21 @@ def test_Edge() -> None:
     e = cdt.Edge(np.array([2, 1], dtype=np.uint32))
     assert e.v1 == 1 and e.v2 == 2, "Constructed wrong edge"
 
+    with pytest.raises(AttributeError) as excinfo:
+        e.v1 = 2
+    assert "can't set attribute" in str(excinfo.value)
+
     assert cdt.Edge(1, 2).__repr__() == "Edge(1, 2)", "Wrong __repr__ output for Edge"
+
+
+def test_Triangle() -> None:
+    tri = cdt.Triangle._make([1, 2, 3], [4, 5, 6])
+    assert tri.vertices == [1, 2, 3]
+    assert tri.vertices[0] == 1
+    assert tri.neighbors == [4, 5, 6]
+    assert tri == cdt.Triangle._make([1, 2, 3], [4, 5, 6])
+    assert tri != cdt.Triangle._make([1, 2, 3], [4, 5, 7])
+    # tri.vertices = [7, 8, 9] # not working
 
 
 def test_Triangulation() -> None:
@@ -213,6 +230,7 @@ if __name__ == '__main__':
     test_constants()
     test_V2d()
     test_Edge()
+    test_Triangle()
     test_Triangulation()
     test_verify_topology()
     test_triangulate_input_file()

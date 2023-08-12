@@ -18,6 +18,7 @@
 #include <utility>
 
 namespace py = pybind11;
+using namespace pybind11::literals;
 
 using coord_t = double;
 using V2d = CDT::V2d<coord_t>;
@@ -55,6 +56,7 @@ PYBIND11_MODULE(_cdt3d, m)
         m.attr("__version__") = "dev";
 #endif
 
+    // should be read-only
     m.attr("NO_NEIGHBOR") = py::int_(CDT::noNeighbor);
     m.attr("NO_VERTEX") = py::int_(CDT::noVertex);
 
@@ -109,6 +111,7 @@ PYBIND11_MODULE(_cdt3d, m)
 
     PYBIND11_NUMPY_DTYPE(CDT::Triangle, vertices, neighbors);
     py::class_<CDT::Triangle>(m, "Triangle")
+        .def_static("_make", &CDT::Triangle::make, "vertices"_a, "neighbors"_a)
         .def_readwrite("vertices", &CDT::Triangle::vertices)
         .def_readwrite("neighbors", &CDT::Triangle::neighbors)
         .def(
@@ -216,18 +219,16 @@ PYBIND11_MODULE(_cdt3d, m)
                     t.fixedEdges.begin(), t.fixedEdges.end());
             },
             py::keep_alive<0, 1>())
-        /*
-        .def_readonly("vertices_triangles", &Triangulation::vertTris)
+        .def_readonly("vertices_triangles", &Triangulation::m_vertTris)
         .def(
             "vertices_triangles_count",
-            [](const Triangulation& t) { return t.vertTris.size(); })
+            [](const Triangulation& t) { return t.m_vertTris.size(); })
         .def(
             "vertices_triangles_iter",
             [](const Triangulation& t) -> py::iterator {
-                return py::make_iterator(t.vertTris.begin(), t.vertTris.end());
+                return py::make_iterator(t.m_vertTris.begin(), t.m_vertTris.end());
             },
             py::keep_alive<0, 1>())
-        */
         // overlaps
         .def_readonly("overlap_count", &Triangulation::overlapCount)
         .def(
