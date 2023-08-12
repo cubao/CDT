@@ -12,8 +12,12 @@ import numpy as np
 import pytest
 import tempfile
 import hashlib
+import os
+import sys
 
-import PythonCDT as cdt
+import cdt3d as cdt
+
+__PWD = os.path.abspath(os.path.dirname(__file__))
 
 
 def test_constants() -> None:
@@ -204,3 +208,14 @@ def test_insert_conform_edges(ee) -> None:
         save_triangulation_as_off(t, off_file)
         with open(off_file, 'rb') as f:
             assert hashlib.md5(f.read()).hexdigest() == '9cb9dbaca4943ff0e3aab6c1d31f5a35', "Wrong OFF file contents"
+
+if __name__ == '__main__':
+    test_constants()
+    test_V2d()
+    test_Edge()
+    test_Triangulation()
+    test_verify_topology()
+    test_triangulate_input_file()
+    test_conform_to_edges()
+    test_insert_vertices()
+    test_insert_conform_edges()
