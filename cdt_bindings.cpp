@@ -23,6 +23,9 @@ using coord_t = double;
 using V2d = CDT::V2d<coord_t>;
 using Triangulation = CDT::Triangulation<coord_t>;
 
+#define STRINGIFY(x) #x
+#define MACRO_STRINGIFY(x) STRINGIFY(x)
+
 namespace
 {
 
@@ -33,7 +36,7 @@ std::string TriInd2str(CDT::TriInd it)
 
 } // namespace
 
-PYBIND11_MODULE(PythonCDT, m)
+PYBIND11_MODULE(_cdt3d, m)
 {
     // clang-format off
     m.doc() = R"pbdoc(
@@ -46,13 +49,11 @@ PYBIND11_MODULE(PythonCDT, m)
     )pbdoc";
     // clang-format on
 
-/*
 #ifdef VERSION_INFO
         m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
 #else
         m.attr("__version__") = "dev";
 #endif
-*/
 
     m.attr("NO_NEIGHBOR") = py::int_(CDT::noNeighbor);
     m.attr("NO_VERTEX") = py::int_(CDT::noVertex);

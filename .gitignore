@@ -82,3 +82,6 @@ moc_*.h
 
 # Visual code files
 *.code-workspace
+
+dist
+*.egg-info
