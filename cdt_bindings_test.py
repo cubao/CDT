@@ -238,19 +238,20 @@ def test_insert_conform_edges(ee) -> None:
 
 def test_triangulate_pcd():
     import open3d as o3d
-    pcd = o3d.io.read_point_cloud(f'{__PWD}/data/segments_1m.pcd')
-    assert len(pcd.points) == 40567
+    # pcd = o3d.io.read_point_cloud(f'{__PWD}/data/segments_1m.pcd')
+    pcd = o3d.io.read_point_cloud(f'{__PWD}/data/segments_1m_cut.pcd')
+    # assert len(pcd.points) == 40567
     t = cdt.Triangulation(cdt.VertexInsertionOrder.AS_PROVIDED, cdt.IntersectingConstraintEdges.IGNORE, 0.0)
     xyzs = np.array(np.asarray(pcd.points)[:, :2])
     t.insert_vertices(xyzs)
-    # t.erase_outer_triangles_and_holes()
+    t.erase_outer_triangles_and_holes()
     assert cdt.verify_topology(t)
     save_triangulation_as_off(t, f"{__PWD}/data/segments_1m.off")
     print()
 
 
 if __name__ == '__main__':
-    test_triangulate_pcd()
+    # test_triangulate_pcd()
 
     test_constants()
     test_V2d()

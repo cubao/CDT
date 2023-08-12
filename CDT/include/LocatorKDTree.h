@@ -48,7 +48,7 @@ public:
     {
         m_kdTree.insert(i, points);
     }
-    /// Find nearest point using R-tree
+    /// Find nearest point using kd-tree
     VertInd nearPoint(
         const V2d<TCoordType>& pos,
         const std::vector<V2d<TCoordType> >& points) const
