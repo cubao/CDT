@@ -143,9 +143,9 @@ def save_triangulation_as_off(t: cdt.Triangulation, off_file) -> None:
     with open(off_file, "w") as f:
         f.write(f"OFF\n")
         f.write(f"{t.vertices_count()} {t.triangles_count()} 0\n")
-        for v in t.vertices_iter():
+        for v in t.vertices:
             f.write(f"{v.x} {v.y} 0\n")
-        for tri in t.triangles_iter():
+        for tri in t.triangles:
             vv = tri.vertices
             f.write(f"3 {int(vv[0])} {int(vv[1])} {int(vv[2])}\n")
 
@@ -236,7 +236,22 @@ def test_insert_conform_edges(ee) -> None:
         with open(off_file, 'rb') as f:
             assert hashlib.md5(f.read()).hexdigest() == '9cb9dbaca4943ff0e3aab6c1d31f5a35', "Wrong OFF file contents"
 
+def test_triangulate_pcd():
+    import open3d as o3d
+    pcd = o3d.io.read_point_cloud(f'{__PWD}/data/segments_1m.pcd')
+    assert len(pcd.points) == 40567
+    t = cdt.Triangulation(cdt.VertexInsertionOrder.AS_PROVIDED, cdt.IntersectingConstraintEdges.IGNORE, 0.0)
+    xyzs = np.array(np.asarray(pcd.points)[:, :2])
+    t.insert_vertices(xyzs)
+    # t.erase_outer_triangles_and_holes()
+    assert cdt.verify_topology(t)
+    save_triangulation_as_off(t, f"{__PWD}/data/segments_1m.off")
+    print()
+
+
 if __name__ == '__main__':
+    test_triangulate_pcd()
+
     test_constants()
     test_V2d()
     test_Edge()

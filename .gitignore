@@ -85,3 +85,4 @@ moc_*.h
 
 dist
 *.egg-info
+data/*.off
