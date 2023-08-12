@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.py": "python",
         "stdexcept": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
@@ -93,7 +94,9 @@
         "alignedvector3": "cpp",
         "bvh": "cpp",
         "fft": "cpp",
-        "mprealsupport": "cpp"
+        "mprealsupport": "cpp",
+        "regex": "cpp",
+        "span": "cpp"
     },
     "workbench.colorCustomizations": {
         "activityBar.background": "#143328",
