@@ -58,6 +58,10 @@ PYBIND11_MODULE(_cdt3d, m)
     m.attr("NO_NEIGHBOR") = py::int_(CDT::noNeighbor);
     m.attr("NO_VERTEX") = py::int_(CDT::noVertex);
 
+    py::enum_<CDT::VertexInsertionOrder::Enum>(m, "VertexInsertionOrder")
+        .value("AUTO", CDT::VertexInsertionOrder::Auto)
+        .value("AS_PROVIDED", CDT::VertexInsertionOrder::AsProvided);
+
     py::enum_<CDT::IntersectingConstraintEdges::Enum>(
         m, "IntersectingConstraintEdges")
         .value("IGNORE", CDT::IntersectingConstraintEdges::Ignore)
@@ -212,6 +216,18 @@ PYBIND11_MODULE(_cdt3d, m)
                     t.fixedEdges.begin(), t.fixedEdges.end());
             },
             py::keep_alive<0, 1>())
+        /*
+        .def_readonly("vertices_triangles", &Triangulation::vertTris)
+        .def(
+            "vertices_triangles_count",
+            [](const Triangulation& t) { return t.vertTris.size(); })
+        .def(
+            "vertices_triangles_iter",
+            [](const Triangulation& t) -> py::iterator {
+                return py::make_iterator(t.vertTris.begin(), t.vertTris.end());
+            },
+            py::keep_alive<0, 1>())
+        */
         // overlaps
         .def_readonly("overlap_count", &Triangulation::overlapCount)
         .def(
@@ -358,5 +374,12 @@ PYBIND11_MODULE(_cdt3d, m)
         .def(
             "erase_outer_triangles_and_holes",
             &Triangulation::eraseOuterTrianglesAndHoles);
+
+    // m.def(
+    //     "verify_topology",
+    //     &CDT::verifyTopology<coord_t>,
+    //     py::arg("triangulation"))
+    //     //
+    //     ;
 
 }
