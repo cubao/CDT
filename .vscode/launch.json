@@ -13,8 +13,6 @@
             "justMyCode": true
         },
         {
-            // C++ Debug 方法
-            // https://momenta.feishu.cn/wiki/wikcnaF7KNS1Ea7z7KaZogRHKgh
             "name": "g++ - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
