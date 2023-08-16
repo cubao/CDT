@@ -1,3 +1,9 @@
 [submodule "CDT/tests/Catch2"]
 	path = CDT/tests/Catch2
 	url = https://github.com/catchorg/Catch2.git
+[submodule "pybind11"]
+	path = pybind11
+	url = https://github.com/pybind/pybind11.git
+[submodule "headers"]
+	path = headers
+	url = https://github.com/cubao/headers.git

@@ -576,6 +576,7 @@ private:
     VertexInsertionOrder::Enum m_vertexInsertionOrder;
     IntersectingConstraintEdges::Enum m_intersectingEdgesStrategy;
     T m_minDistToConstraintEdge;
+public:
     TriIndVec m_vertTris; /// one triangle adjacent to each vertex
 };
 

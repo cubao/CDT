@@ -187,8 +187,12 @@ public:
     /// @param points external point-buffer
     value_type nearest(
         const point_type& point,
-        const std::vector<point_type>& points) const
+        const std::vector<point_type>& points,
+        const coord_type* point_z = nullptr,
+        const coord_type* z_thresh = nullptr,
+        const std::vector<coord_type>* points_z = nullptr) const
     {
+        const bool use_z = point_z && z_thresh && *z_thresh > 0 && points_z && points_z->size() == points.size();
         value_type out;
         int iTask = -1;
         coord_type minDistSq = std::numeric_limits<coord_type>::max();
@@ -204,6 +208,8 @@ public:
             {
                 for(pd_cit it = n.data.begin(); it != n.data.end(); ++it)
                 {
+                    if (use_z && std::fabs((*points_z)[*it] - *point_z) > *z_thresh)
+                        continue;
                     const point_type& p = points[*it];
                     const coord_type distSq = CDT::distanceSquared(point, p);
                     if(distSq < minDistSq)
